@@ -21,8 +21,8 @@ func (n *netConn) writeString(framer Framer, formatter Formatter, p Priority, ho
 		formatter = DefaultFormatter
 	}
 	formattedMessage := framer(formatter(p, hostname, tag, msg))
-	// Set a 30 second write deadline on sending to syslog
-	if err := n.conn.SetWriteDeadline(time.Now().Add(30 * time.Second)); err != nil {
+	// Set a 60 second read and write deadline as writes may cause reads
+	if err := n.conn.SetDeadline(time.Now().Add(60 * time.Second)); err != nil {
 		return err
 	}
 	_, err := n.conn.Write([]byte(formattedMessage))

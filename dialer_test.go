@@ -105,7 +105,7 @@ func TestTLSDialer(t *testing.T) {
 	w := Writer{
 		priority:  LOG_ERR,
 		tag:       "tag",
-		hostname:  "",
+		hostname:  "localhost",
 		network:   "tcp+tls",
 		raddr:     addr,
 		tlsConfig: &config,
